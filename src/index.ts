@@ -1,6 +1,6 @@
 import express from 'express';
 
-import notesRoutes from './routes/Notes'
+import notesRout from './routes/NotesRout'
 
 
 const router = express();
@@ -10,7 +10,7 @@ const jsonBodyMiddleware = express.json();
 
 router.use(jsonBodyMiddleware);
 
-router.use('/notes', notesRoutes)
+router.use('/notes', notesRout)
 
 router.listen(port, () => {
     console.log(`Example app listening on port ${port}`)

@@ -13,7 +13,7 @@ const readAllNotes = (req, res) => {
 const readNotesStats = (req, res) => {
     res
         .status(HttpStatuses_1.HTTP_STATUSES.OK_200)
-        .json(DBNotes_1.db.notes);
+        .json({ summary: DBNotes_1.db.notes.length });
 };
 const readNote = (req, res) => {
     const foundNotes = DBNotes_1.db.notes.find(c => c.id === req.params.id);
@@ -22,13 +22,10 @@ const readNote = (req, res) => {
         return;
     }
     res.status(HttpStatuses_1.HTTP_STATUSES.OK_200);
+    res.json(foundNotes);
 };
 const createNote = (req, res) => {
     if (!req.body.title && !req.body.category && !req.body.content) {
-        res.sendStatus(HttpStatuses_1.HTTP_STATUSES.BAD_REQUEST_400);
-        return;
-    }
-    if (!(typeof (req.body.title) == 'string')) {
         res.sendStatus(HttpStatuses_1.HTTP_STATUSES.BAD_REQUEST_400);
         return;
     }
